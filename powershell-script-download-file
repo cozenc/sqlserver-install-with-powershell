@@ -1,0 +1,10 @@
+$folder = "C:\SQLServerDownload"
+$url= https://download.microsoft.com/download/D/0/C/D0CCEE78-05BE-4A5E-AE9C-2FDE69F6600D/SQLServerVnextCTP2-x64-ENU.iso
+$req = [System.Net.HttpWebRequest]::Create($url)
+$req.Method = "HEAD"
+$response = $req.GetResponse()
+$fUri = $response.ResponseUri
+$filename = [System.IO.Path]::GetFileName($fUri.LocalPath); 
+$response.Close()
+$target = join-path $folder $filename 
+Invoke-WebRequest -Uri $url -OutFile $target
