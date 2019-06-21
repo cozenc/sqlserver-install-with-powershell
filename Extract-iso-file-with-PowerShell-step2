@@ -1,0 +1,4 @@
+$ImagePath = 'C:\SQLServerDownload\SQLServerVnextCTP2-x64-ENU.iso'
+New-Item -Path C:\SQLServer -ItemType Directory
+Copy-Item -Path (Join-Path -Path (Get-PSDrive -Name ((Mount-DiskImage -ImagePath $ImagePath -PassThru) | Get-Volume).DriveLetter).Root -ChildPath '*') -Destination C:\SQLServer\ -Recurse
+Dismount-DiskImage -ImagePath $ImagePath
